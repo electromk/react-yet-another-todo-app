@@ -1,8 +1,10 @@
 import React from 'react';
 import uuid from 'node-uuid';
+
 import TodoList from './TodoList.jsx';
 import AddTodoForm from './AddTodoForm.jsx';
 import SearchTodoForm from './SearchTodoForm.jsx';
+import * as TodoAPI from '../api/TodoAPI.jsx';
 
 export default class TodoApp extends React.Component {
     constructor(props) {
@@ -11,12 +13,7 @@ export default class TodoApp extends React.Component {
         this.state = {
             showCompleted: false,
             searchText: '',
-            todos: [
-                {id: uuid(), text: "Walk the dog", completed: false},
-                {id: uuid(), text: "Learn React", completed: true},
-                {id: uuid(), text: "Leave mail on porch", completed: false},
-                {id: uuid(), text: "Have fun", completed: true}
-            ]
+            todos: TodoAPI.getTodos()
         };
 
         this.handleAddTodo = this.handleAddTodo.bind(this);
@@ -36,6 +33,10 @@ export default class TodoApp extends React.Component {
                 </div>
             </div>
         );
+    }
+
+    componentDidUpdate() {
+        TodoAPI.setTodos(this.state.todos);
     }
 
     handleAddTodo(text) {
