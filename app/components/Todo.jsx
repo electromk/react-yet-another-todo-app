@@ -7,7 +7,7 @@ export default class Todo extends React.Component {
 
     static get propTypes() {
         return {
-            id: React.PropTypes.number,
+            id: React.PropTypes.string,
             text: React.PropTypes.string
         };
     }

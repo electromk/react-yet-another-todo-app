@@ -15,8 +15,8 @@ describe('TodoList component', () => {
 
     it("should render one Todo component for each todo item", () => {
         let data = [
-            {id: 1, text: 'todo 1'},
-            {id: 2, text: 'todo 2'}
+            {id: '1', text: 'todo 1'},
+            {id: '2', text: 'todo 2'}
         ];
 
         let todoList = TestUtils.renderIntoDocument(<TodoList todos={data}/>);

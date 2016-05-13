@@ -1,4 +1,5 @@
 import React from 'react';
+import uuid from 'node-uuid';
 import TodoList from './TodoList.jsx';
 import AddTodoForm from './AddTodoForm.jsx';
 import SearchTodoForm from './SearchTodoForm.jsx';
@@ -11,10 +12,10 @@ export default class TodoApp extends React.Component {
             showCompleted: false,
             searchText: '',
             todos: [
-                {id: 1, text: "Walk the dog"},
-                {id: 2, text: "Learn React"},
-                {id: 3, text: "Leave mail on porch"},
-                {id: 4, text: "Have fun"}
+                {id: uuid(), text: "Walk the dog"},
+                {id: uuid(), text: "Learn React"},
+                {id: uuid(), text: "Leave mail on porch"},
+                {id: uuid(), text: "Have fun"}
             ]
         };
 
@@ -37,7 +38,9 @@ export default class TodoApp extends React.Component {
     }
 
     handleAddTodo(text) {
-        alert("New todo received " + text);
+        this.setState({
+            todos: [...this.state.todos, {id: uuid(), text: text}]
+        });
     }
 
     handleSearch(searchText, showCompleted) {
