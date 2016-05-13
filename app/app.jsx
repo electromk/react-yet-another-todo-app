@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Route, Router, IndexRoute, hashHistory} from 'react-router';
+import TodoApp from './components/TodoApp.jsx';
 
 // Load Foundation
 $(document).foundation();
@@ -9,6 +9,6 @@ $(document).foundation();
 require('style!css!sass!./styles/app.scss');
 
 ReactDOM.render(
-    <h1>App Boilerplate #3</h1>,
+    <TodoApp/>,
     document.getElementById('app')
 );
