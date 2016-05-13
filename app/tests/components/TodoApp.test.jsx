@@ -1,7 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
-import $ from 'jquery';
 import {expect} from 'chai';
 
 // Component under test.
@@ -20,5 +18,15 @@ describe('TodoApp component', () => {
         todoApp.handleAddTodo(text);
 
         expect(todoApp.state.todos[0].text).to.be.equal(text);
+    });
+
+    it('should toggle completed status when handleToggle is called', () => {
+        let todoData = {id: '11', text: 'test feature', completed: false},
+            todoApp = TestUtils.renderIntoDocument(<TodoApp/>);
+
+        todoApp.setState({todos: [todoData]});
+        expect(todoApp.state.todos[0].completed).to.be.false;
+        todoApp.handleToggle('11');
+        expect(todoApp.state.todos[0].completed).to.be.true;
     });
 });

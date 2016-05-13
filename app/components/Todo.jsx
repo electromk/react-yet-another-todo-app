@@ -13,10 +13,17 @@ export default class Todo extends React.Component {
     }
 
     render() {
-        let {id, text} = this.props;
+        let {id, text, completed} = this.props;
 
         return (
-            <div>{id + ": " + text}</div>
+            <div onClick={() => {
+                this.props.onToggle(id)
+            }}>
+                <label>
+                    <input type="checkbox" defaultChecked={completed}/>
+                    {text}
+                </label>
+            </div>
         );
     }
 }
