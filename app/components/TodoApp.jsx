@@ -19,7 +19,6 @@ export default class TodoApp extends React.Component {
 
         this.handleAddTodo = this.handleAddTodo.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
-        this.handleToggle = this.handleToggle.bind(this);
     }
 
     render() {
@@ -33,7 +32,7 @@ export default class TodoApp extends React.Component {
                     <div className="columns small-centered small-11 medium-6 large-4">
                         <div className="container">
                             <SearchTodoForm onSearch={this.handleSearch}/>
-                            <TodoList todos={filteredTodos} onToggle={this.handleToggle}/>
+                            <TodoList/>
                             <AddTodoForm onAddTodo={this.handleAddTodo}/>
                         </div>
                     </div>
@@ -59,20 +58,6 @@ export default class TodoApp extends React.Component {
         this.setState({
             showCompleted: showCompleted,
             searchText: searchText.toLowerCase()
-        });
-    }
-
-    handleToggle(id) {
-        let updatedTodos = this.state.todos.map((todo) => {
-            if(todo.id === id) {
-                todo.completed = ! todo.completed;
-                todo.completedAt = todo.completed ? moment().unix() : null;
-            }
-            return todo;
-        });
-
-        this.setState({
-            todos: updatedTodos
         });
     }
 }
