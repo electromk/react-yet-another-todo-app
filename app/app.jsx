@@ -3,10 +3,17 @@ import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import TodoApp from './components/TodoApp.jsx';
 import store from './store/store.jsx';
+import * as actions from './actions/actions.jsx';
+import * as TodoAPI from './api/TodoAPI.jsx';
 
 store.subscribe(() => {
-    console.log('New state', store.getState());
+    let state = store.getState();
+    console.log('New State:', state);
+    TodoAPI.setTodos(state.todos);
 });
+
+let initialTodos = TodoAPI.getTodos();
+store.dispatch(actions.addTodos(initialTodos));
 
 // Load Foundation
 $(document).foundation();

@@ -17,6 +17,13 @@ describe("Actions", () => {
         expect(actualAction).to.eql(expectedAction);
     });
 
+    it("should generate addTodos action", () => {
+        let expectedAction = {type: "ADD_TODOS", todos: ['1', '2']};
+        let actualAction = actions.addTodos(expectedAction.todos);
+
+        expect(actualAction).to.eql(expectedAction);
+    });
+
     it("should generate toggleTodo action", () => {
         let expectedAction = {type: "TOGGLE_TODO", id: "1"};
         let actualAction = actions.toggleTodo(expectedAction.id);

@@ -46,7 +46,20 @@ describe("Reducers", () => {
             result = reducers.todosReducer(df(todos), df(action2));
             expect(result[1].completed).to.be.false;
             expect(result[0].completedAt).to.be.null;
+        });
 
+        it("should add existing todos to the list on ADD_TODOS action", () => {
+            let todos = [
+                {id: '1', text: 'do something', completed: false, createdAt: 111, completedAt: null},
+                {id: '2', text: 'do something else', completed: true, createdAt: 112, completedAt: 113}
+            ];
+            let action = {type: 'ADD_TODOS', todos};
+
+            let result = reducers.todosReducer(df([]), df(action));
+
+            expect(result.length).to.equal(2);
+            expect(result[0]).to.eql(todos[0]);
+            expect(result[1]).to.eql(todos[1]);
         });
     });
 });
