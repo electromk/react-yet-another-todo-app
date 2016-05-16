@@ -1,38 +1,41 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import * as actions from '../actions/actions.jsx';
 
-export default class SearchTodoForm extends React.Component {
+export class SearchTodoForm extends React.Component {
     constructor(props) {
         super(props);
-
-        this.handleSearch = this.handleSearch.bind(this);
-    }
-
-    static get propTypes() {
-        return {
-            onSearch: React.PropTypes.func
-        };
     }
 
     render() {
+        let {dispatch, showCompleted, searchText} = this.props;
+
         return (
             <div className="container__header">
                 <div>
-                    <input type="search" ref="searchText" placeholder="Filter ToDos" onChange={this.handleSearch}/>
+                    <input type="search" ref="searchText" placeholder="Filter ToDos" value={searchText} onChange={() => {
+                        let searchText = this.refs.searchText.value;
+                        dispatch(actions.setSearchText(searchText))
+                    }}/>
                 </div>
                 <div>
                     <label>
-                        <input type="checkbox" ref="showCompleted" onChange={this.handleSearch}/>
+                        <input type="checkbox" ref="showCompleted" checked={showCompleted} onChange={() => {
+                            dispatch(actions.toggleShowCompleted());
+                        }}/>
                         Show completed ToDos
                     </label>
                 </div>
             </div>
         );
     }
-
-    handleSearch() {
-        let searchText = this.refs.searchText.value;
-        let showCompleted = this.refs.showCompleted.checked;
-
-        this.props.onSearch(searchText, showCompleted);
-    }
 }
+
+export default connect(
+    (state) => {
+        return {
+            showCompleted: state.showCompleted,
+            searchText: state.searchText
+        };
+    }
+)(SearchTodoForm);

@@ -1,16 +1,12 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import * as actions from '../actions/actions.jsx';
 
-export default class AddTodoForm extends React.Component {
+export class AddTodoForm extends React.Component {
     constructor(props) {
         super(props);
 
         this.onFormSubmit = this.onFormSubmit.bind(this);
-    }
-
-    static get propTypes() {
-        return {
-            onAddTodo: React.PropTypes.func
-        }
     }
 
     render() {
@@ -35,7 +31,8 @@ export default class AddTodoForm extends React.Component {
             return;
         }
 
-        let {onAddTodo} = this.props;
-        onAddTodo(todoText);
+        this.props.dispatch(actions.addTodo(todoText));
     }
-};
+}
+
+export default connect()(AddTodoForm);
